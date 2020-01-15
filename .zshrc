@@ -1,5 +1,7 @@
 # If you come from bash you might have to change your $PATH.
 source /Users/<username>/.bash_profile
+source /Users/megan/google-cloud-sdk/completion.zsh.inc
+source /Users/megan/google-cloud-sdk/path.zsh.inc
 
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 # export PATH="$HOME/.npm-packages/bin:$PATH"
