@@ -1,2 +1,1 @@
-# zsh-setup
-My oh-my-zsh setup
+My favorite terminal and IDE settings
