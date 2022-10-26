@@ -1,18 +1,22 @@
 # If you come from bash you might have to change your $PATH.
-source /Users/<username>/.bash_profile
+source /Users/megan/.bash_profile
 source /Users/megan/google-cloud-sdk/completion.zsh.inc
 source /Users/megan/google-cloud-sdk/path.zsh.inc
 
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 # export PATH="$HOME/.npm-packages/bin:$PATH"
-# export PATH=$PATH:/Users/<username>/.npm-global/bin
+# export PATH=$PATH:/Users/megan/.npm-global/bin
 # export PATH=/usr/local/share/npm/bin:$PATH
 # export PATH=/usr/local/Cellar:$PATH
 
 # export PATH=$HOME/npm-global/lib/node_modules:$PATH
 # export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
 # export PATH=/usr/local/share/npm/bin:$PATH
+# export PATH="/usr/local/Cellar/openvpn/2.4.8/sbin/openvpn:$PATH"
 export PATH="$HOME/.npm-packages/bin:$PATH"
+export PATH=$(brew --prefix openvpn)/sbin:$PATH
+export PATH=$PATH:$GOROOT/bin
+export PATH=$PATH:~/.cargo/bin
 
 # Setting PATH for Python 3.6
 # The original version is saved in .bash_profile.pysave
@@ -24,16 +28,11 @@ export PATH
 PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
 export PATH
 
-# Setting PATH for Python 2.7
-# The original version is saved in .bash_profile.pysave
-PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
-export PATH
-
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/<username>/Desktop/Desktop/Desktop Folders/google-cloud-sdk/path.bash.inc' ]; then source '/Users/<username>/Desktop/Desktop/Desktop Folders/google-cloud-sdk/path.bash.inc'; fi
+if [ -f '/Users/megan/Desktop/Desktop/Desktop Folders/google-cloud-sdk/path.bash.inc' ]; then source '/Users/megan/Desktop/Desktop/Desktop Folders/google-cloud-sdk/path.bash.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/<username>/Desktop/Desktop/Desktop Folders/google-cloud-sdk/completion.bash.inc' ]; then source '/Users/<username>/Desktop/Desktop/Desktop Folders/google-cloud-sdk/completion.bash.inc'; fi
+if [ -f '/Users/megan/Desktop/Desktop/Desktop Folders/google-cloud-sdk/completion.bash.inc' ]; then source '/Users/megan/Desktop/Desktop/Desktop Folders/google-cloud-sdk/completion.bash.inc'; fi
 
 
 # Path to your oh-my-zsh installation.
@@ -43,7 +42,11 @@ export ZSH=$HOME/.oh-my-zsh
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+
 ZSH_THEME="spaceship"
+# ZSH_THEME="typewritten/typewritten"
+# export TYPEWRITTEN_CURSOR="block"
+
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -107,7 +110,7 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bg=cyan,bold,underline"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git colored-man-pages colorize pip python brew osx zsh-syntax-highlighting zsh-autosuggestions)
+plugins=(git colored-man-pages colorize pip python brew macos zsh-syntax-highlighting zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -140,43 +143,6 @@ source $ZSH/oh-my-zsh.sh
 alias dev='cd ~/Documents/files/dev'
 alias gs='git status'
 
-# added by Miniconda3 4.6.14 installer
-# >>> conda init >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$(CONDA_REPORT_ERRORS=false '/Users/megan/miniconda3/bin/conda' shell.bash hook 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    \eval "$__conda_setup"
-else
-    if [ -f "/Users/megan/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/megan/miniconda3/etc/profile.d/conda.sh"
-        CONDA_CHANGEPS1=false conda activate base
-    else
-        \export PATH="/Users/megan/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda init <<<
-
-
-alias start-master='~/apache-spark/sbin/start-master.sh'
-alias start-slave='~/apache-spark/sbin/start-slave.sh'
-alias stop-all='~/apache-spark/sbin/stop-all.sh'
-alias stop-master='~/apache-spark/sbin/stop-master.sh'
-alias stop-slave='~/apache-spark/sbin/stop-slave.sh'
-alias spark-submit='~/apache-spark/bin/spark-submit'
-alias start-livy='cd /Users/<username>/apache-livy/bin && ./livy-server'
-
-# Apache Spark Variables
-export SPARK_HOME=~/apache-spark
-export SPARK_PATH=~/apache-spark
-export PYSPARK_DRIVER_PYTHON=python3.7
-
-# (Apache Spark) For python3 you have to add the line below or
-# you will get an error:
-export PYSPARK_PYTHON=python3.7
-
-export PATH="~/anaconda3/bin:$PATH"
-
 # HOW TO RUN VISUAL STUDIO CODE FROM ZSH ON MAC OSX
 function code {
     if [[ $# = 0 ]]
@@ -192,3 +158,14 @@ function code {
 # NVM Stuff
 export NVM_DIR="$HOME/.nvm"
 . "$(brew --prefix nvm)/nvm.sh"
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+
+# fnm
+eval "$(fnm env --use-on-cd)"
+
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
